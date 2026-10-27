@@ -83,7 +83,8 @@
 
   immich.enable = true;
   papra.enable = true;
-  ai.enable = true
+  ai.enable = true;
+  podman.enable = true;
 
   system.stateVersion = "26.05"; # Did you read the comment?
 }
