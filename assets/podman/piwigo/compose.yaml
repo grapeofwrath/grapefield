@@ -1,0 +1,35 @@
+networks:
+  piwigo-network:
+    external: false
+
+services:
+  piwigo-main:
+    image: piwigo/piwigo:latest
+    restart: always
+    environment:
+      - TZ=${timezone}
+      - PIWIGO_UID=${PIWIGO_UID}
+      - PIWIGO_GID=${PIWIGO_GID}
+    networks:
+      - piwigo-network
+    ports:
+      - ${piwigo_port}:80
+    depends_on:
+      - piwigo-db
+    volumes:
+      - ./piwigo-data/piwigo:/var/www/html/piwigo/
+      - ./piwigo-data/scripts:/usr/local/bin/scripts/
+  piwigo-db:
+    image: docker.io/library/mariadb:lts
+    restart: always
+    environment:
+      - MARIADB_RANDOM_ROOT_PASSWORD=true
+      - MARIADB_USER=piwigodb_user
+      - MARIADB_DATABASE=piwigodb
+      # Defined in .env
+      - MARIADB_PASSWORD=${db_user_password} 
+      - TZ=${timezone}
+    networks:
+      - piwigo-network
+    volumes:
+      - ./piwigo-data/mysql:/var/lib/mysql

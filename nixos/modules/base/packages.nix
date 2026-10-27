@@ -6,5 +6,7 @@
     just
     alejandra
     compose2nix
+    ffmpeg
+    exiftool
   ];
 }
