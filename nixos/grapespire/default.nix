@@ -102,5 +102,6 @@
   programs.dux-search.enable = true;
   programs.dux-files.enable = true;
 
+  battery.enable = true;
   podman.enable = true;
 }
