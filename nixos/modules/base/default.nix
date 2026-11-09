@@ -10,6 +10,7 @@
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
+      connect-timeout = 30;
     };
     gc = {
       automatic = true;
