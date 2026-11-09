@@ -54,7 +54,8 @@
     defaultUser = "marcus";
     systems = [
       "grapelab" #homelab
-      "grapespire"
+      "grapespire" #laptop
+      "grapecontrol" #vps
     ];
   in {
     nixosConfigurations = builtins.listToAttrs (map (hostName: {
