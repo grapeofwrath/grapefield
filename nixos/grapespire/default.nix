@@ -7,8 +7,10 @@
       ./../modules/base
       ./../modules/server
 
-      inputs.dux-files.nixosModules.dux-files
+      inputs.brave.nixosModules.default
+      #inputs.dux-files.nixosModules.dux-files
       inputs.dms-plugin-registry.nixosModules.default
+      inputs.montrose.nixosModules.default
     ];
 
   services.displayManager.dux-greeter = {
@@ -99,8 +101,14 @@
       sathiAi.enable = true;
     };
   };
-  programs.dux-search.enable = true;
-  programs.dux-files.enable = true;
+  #programs.dux-search.enable = true;
+  #programs.dux-files.enable = true;
+
+  services.caddy = {
+    enable = true;
+  };
+
+  services.montrose.enable = true;
 
   battery.enable = true;
   podman.enable = true;

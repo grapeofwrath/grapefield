@@ -30,6 +30,7 @@
     gawk
     zstd
     gnupg
+    imagemagick
 
     nix-output-monitor
 
@@ -47,6 +48,8 @@
     lm_sensors
     pciutils
     usbutils
+
+    rapidraw
   ];
 
   programs.git = {

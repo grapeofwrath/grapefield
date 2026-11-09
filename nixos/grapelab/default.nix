@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   defaultUser,
   ...
 }: {
@@ -9,6 +10,8 @@
     ./hardware-configuration.nix
 
     ./../modules/server
+
+    inputs.montrose.nixosModules.default
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -80,6 +83,8 @@
       reverse_proxy localhost:5002
     '';
   };
+
+  services.montrose.enable = true;
 
   immich.enable = true;
   papra.enable = true;
