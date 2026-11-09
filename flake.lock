@@ -44,11 +44,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794142300,
-        "narHash": "sha256-OztjfK2z1yBl1NbkvCA3DPSIwjxi9ms1c91DnBLxRs4=",
+        "lastModified": 1794185588,
+        "narHash": "sha256-DeyIz6UQRTjoUxoFnsiOkNEYDOVVLuceifdSmhWe9A8=",
         "owner": "duxlabs-dev",
         "repo": "dux-plugin-registry",
-        "rev": "9973cecae32b8fedc17917c3235189cacab4ea4f",
+        "rev": "ed9cf84f93c39160f99241c5027597b3902a4d8f",
         "type": "github"
       },
       "original": {
@@ -105,11 +105,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794183191,
-        "narHash": "sha256-jKNVPuHpaq28pKdTcPKasAqQGbT/b01bQMjfvGmlPl0=",
+        "lastModified": 1794189062,
+        "narHash": "sha256-w62fi0SRlJLKAST5jY8GMuGiga4Vd59/nXMC7uZlQBs=",
         "owner": "grapeofwrath",
         "repo": "montrose",
-        "rev": "43d88303919c71bc813910384099cc0b603edcb1",
+        "rev": "bc41f0f3ff4112f82fd24d8adbff3edb7f962950",
         "type": "github"
       },
       "original": {
