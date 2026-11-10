@@ -47,6 +47,4 @@
 
   programs.ssh.startAgent = true;
   programs.direnv.enable = true;
-
-  system.stateVersion = "26.05";
 }
