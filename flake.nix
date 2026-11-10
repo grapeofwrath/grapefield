@@ -58,30 +58,63 @@
       "grapecontrol" #vps
     ];
   in {
-    nixosConfigurations = builtins.listToAttrs (map (hostName: {
-        name = hostName;
-        value = nixpkgs.lib.nixosSystem {
-          specialArgs = let
-            system = "x86_64-linux";
-          in {
-            pkgs-stable = import stable {
-              inherit system;
-              config.allowUnfree = true;
-            };
-            inherit inputs stable defaultUser hostName gLib;
+    nixosConfigurations = {
+      "grapecontrol" = let hostName = "grapecontrol"; in nixpkgs.lib.nixosSystem {
+        specialArgs = let
+          system = "x86_64-linux";
+        in {
+          pkgs-stable = import stable {
+            inherit system;
+            config.allowUnfree = true;
           };
-          modules = [
-            ./nixos/${hostName}
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${defaultUser} = import ./home/${hostName};
-              home-manager.extraSpecialArgs = {inherit inputs defaultUser gLib;};
-            }
-          ];
+          inherit inputs stable defaultUser hostName gLib;
         };
-      })
-      systems);
+        modules = [
+          ./nixos/${hostName}
+        ];
+      };
+      "grapelab" = let hostName = "grapelab"; in nixpkgs.lib.nixosSystem {
+        specialArgs = let
+          system = "x86_64-linux";
+        in {
+          pkgs-stable = import stable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          inherit inputs stable defaultUser hostName gLib;
+        };
+        modules = [
+          ./nixos/${hostName}
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${defaultUser} = import ./home/${hostName};
+            home-manager.extraSpecialArgs = {inherit inputs defaultUser gLib;};
+          }
+        ];
+      };
+      "grapespire" = let hostName = "grapespire"; in nixpkgs.lib.nixosSystem {
+        specialArgs = let
+          system = "x86_64-linux";
+        in {
+          pkgs-stable = import stable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          inherit inputs stable defaultUser hostName gLib;
+        };
+        modules = [
+          ./nixos/${hostName}
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${defaultUser} = import ./home/${hostName};
+            home-manager.extraSpecialArgs = {inherit inputs defaultUser gLib;};
+          }
+        ];
+      };
+    };
   };
 }
