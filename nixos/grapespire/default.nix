@@ -2,17 +2,21 @@
 
 {
   imports = [
-      ./hardware-configuration.nix
+    ./hardware-configuration.nix
 
-      ./../modules/base
-      ./../modules/server
+    ./../modules/base
+    ./../modules/server
 
-      inputs.brave.nixosModules.default
-      #inputs.dux-files.nixosModules.dux-files
-      inputs.dms-plugin-registry.nixosModules.default
-      inputs.montrose.nixosModules.default
-    ];
+    inputs.brave.nixosModules.default
+    #inputs.dux-files.nixosModules.dux-files
+    inputs.dms-plugin-registry.nixosModules.default
+    inputs.montrose.nixosModules.default
+  ];
 
+  nix.settings.secret-key-files = [
+    "/home/marcus/.ssh/grape-nix-key.sec"
+  ];
+  
   services.displayManager.dux-greeter = {
     enable = true;
     compositor.name = "hyprland";
@@ -101,8 +105,8 @@
       sathiAi.enable = true;
     };
   };
-  #programs.dux-search.enable = true;
-  #programs.dux-files.enable = true;
+  programs.dux-search.enable = true;
+  programs.dux-files.enable = true;
 
   services.caddy = {
     enable = true;

@@ -22,6 +22,7 @@
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
   networking.domain = "";
+  users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEJ8yDdkacpKp8z72NwAhbQKnvjRWvQltrQ41uFi3HK7 grapeofwrath@pm.me'' ];
   # 
 
   boot = {
