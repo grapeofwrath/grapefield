@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, defaultUser,  ... }:
 
 {
   imports = [
@@ -110,6 +110,16 @@
 
   services.caddy = {
     enable = true;
+  };
+
+  sops = {
+    defaultSopsFile = ./../../secrets.yaml;
+    validateSopsFiles = false;
+    age = {
+      sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+      keyFile = "/home/${defaultUser}/.config/sops/age/keys.txt";
+      generateKey = false;
+    };
   };
 
   services.montrose.enable = true;

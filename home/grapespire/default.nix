@@ -50,6 +50,9 @@
     usbutils
 
     rapidraw
+    prismlauncher
+    rcon-cli
+    filezilla
   ];
 
   programs.git = {

@@ -11,6 +11,9 @@
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
       connect-timeout = 30;
+      trusted-public-keys = [
+        "grape-nix-cache:CbEHUYEzXkpPNvjALkG04Nw+tjs/zOU8DjVX0r6QteU="
+      ];
     };
     gc = {
       automatic = true;

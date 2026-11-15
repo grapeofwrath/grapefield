@@ -1,0 +1,10 @@
+keys:
+  - &grapespire age1yg3wnqtvhgmdl3ezrusekfjsftj78prrplxhl3m0sslykyan6d7skl4het
+  - &grapecontrol age1jksxutmm5gyaqnupx7yduzg9gu2g8ps3qff6vgg97373920z0pkqqqplkv
+  - &users
+    - &marcusatgrapespire age14gmw8ttn8mw00kzlqv057k89argvmz3xgnajsyyfvqkdhqshzucs0ms6zd
+    - &marcusatgrapecontrol age1ey9rnnph0wyf4ecwe95yksvj38nxdczd9ghgvmt4gh53vqvtm39sz545u5
+creation_rules:
+  - path_regex: secrets.yaml$
+    key_groups:
+      - age: [*grapespire, *grapecontrol, *marcusatgrapespire, *marcusatgrapecontrol]

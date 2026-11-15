@@ -10,7 +10,7 @@
   imports = [
     ./hardware-configuration.nix
 
-    #./../modules/base
+    ./../modules/server
 
     inputs.montrose.nixosModules.default
   ];
@@ -101,6 +101,17 @@
       reverse_proxy localhost:5050
     '';
   };
+
+  sops = {
+    defaultSopsFile = ./../../secrets.yaml;
+    validateSopsFiles = false;
+    age = {
+      sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+      keyFile = "/home/${defaultUser}/.config/sops/age/keys.txt";
+      generateKey = false;
+    };
+  };
+
   services.montrose.enable = true;
 
   system.stateVersion = "23.11"; # Did you read the comment?

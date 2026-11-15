@@ -10,6 +10,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     dux-files = {
       url = "github:duxlabs-dev/dux-files";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,6 +39,7 @@
     nixpkgs,
     stable,
     home-manager,
+    sops-nix,
     ...
   }: let
     gLib = {
@@ -52,13 +58,9 @@
         map (f: (path + "/${f}")) (builtins.attrNames (builtins.readDir path));
     };
     defaultUser = "marcus";
-    systems = [
-      "grapelab" #homelab
-      "grapespire" #laptop
-      "grapecontrol" #vps
-    ];
   in {
     nixosConfigurations = {
+      # vps
       "grapecontrol" = let hostName = "grapecontrol"; in nixpkgs.lib.nixosSystem {
         specialArgs = let
           system = "x86_64-linux";
@@ -71,8 +73,10 @@
         };
         modules = [
           ./nixos/${hostName}
+          sops-nix.nixosModules.default
         ];
       };
+      # homelab
       "grapelab" = let hostName = "grapelab"; in nixpkgs.lib.nixosSystem {
         specialArgs = let
           system = "x86_64-linux";
@@ -85,6 +89,7 @@
         };
         modules = [
           ./nixos/${hostName}
+          sops-nix.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -94,6 +99,7 @@
           }
         ];
       };
+      # laptop
       "grapespire" = let hostName = "grapespire"; in nixpkgs.lib.nixosSystem {
         specialArgs = let
           system = "x86_64-linux";
@@ -106,6 +112,7 @@
         };
         modules = [
           ./nixos/${hostName}
+          sops-nix.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

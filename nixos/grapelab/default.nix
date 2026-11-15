@@ -23,10 +23,11 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
+  users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEJ8yDdkacpKp8z72NwAhbQKnvjRWvQltrQ41uFi3HK7 grapeofwrath@pm.me'' ];
 
   users.users.marcus = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "networkmanager" "minecraft"]; # Enable ‘sudo’ for the user.
     initialPassword = "changeme";
     packages = with pkgs; [
       tree
@@ -63,7 +64,14 @@
     '';
   };
 
-  services.montrose.enable = true;
+  services.purpur = {
+    enable = true;
+    version = "26.3";
+    build = "2658";
+    hash = "sha256-7y8Z7C/xUnOwIOCM1Gv5WjYpYkOGQzewaOJfW3XALj8=";
+    javaPackage = pkgs.jdk25_headless;
+    memory = "8192M";
+  };
 
   immich.enable = true;
   papra.enable = true;
