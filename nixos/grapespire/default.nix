@@ -13,9 +13,13 @@
     inputs.montrose.nixosModules.default
   ];
 
-  nix.settings.secret-key-files = [
-    "/home/marcus/.ssh/grape-nix-key.sec"
-  ];
+  nix.settings = {
+    substituters = [ "https://claude-code.cachix.org" ];
+    trusted-public-keys = [ "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk=" ];
+    secret-key-files = [
+      "/home/marcus/.ssh/grape-nix-key.sec"
+    ];
+  };
   
   services.displayManager.dux-greeter = {
     enable = true;
@@ -72,6 +76,8 @@
     helix
     curl
     kitty
+
+    claude-code
   ];
 
   environment.variables.EDITOR = "helix";

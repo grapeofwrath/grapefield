@@ -29,6 +29,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    claude-code.url = "github:sadjow/claude-code-nix?ref=v2.1.329";
+    claude-sandbox.url = "github:mrquentin/claude-sandbox";
     montrose = {
       url = "github:grapeofwrath/montrose";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +42,8 @@
     stable,
     home-manager,
     sops-nix,
+    claude-code,
+    claude-sandbox,
     ...
   }: let
     gLib = {
@@ -112,6 +116,14 @@
         };
         modules = [
           ./nixos/${hostName}
+          claude-sandbox.nixosModules.default
+          {
+            nixpkgs.overlays = [ claude-code.overlays.default ];
+            programs.claude-sandbox = {
+              enable = true;
+              forwardSSHAgent = true;
+            };
+          }
           sops-nix.nixosModules.default
           home-manager.nixosModules.home-manager
           {
