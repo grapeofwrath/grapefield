@@ -184,11 +184,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794640066,
-        "narHash": "sha256-eDWgANuBIQon2QnBOba9RO/c1IyKx93c91ljBaVAdjM=",
+        "lastModified": 1795140930,
+        "narHash": "sha256-iW8vANhmDZ2L4JUg4V0cotADsje6cTyj6R0gFJnjUtQ=",
         "owner": "grapeofwrath",
         "repo": "montrose",
-        "rev": "8248a389aa08a5998412b19b02011aeae8263eb5",
+        "rev": "c95a2f1d5481f75f01d42d11bf8cc2f0046d38d9",
         "type": "github"
       },
       "original": {
