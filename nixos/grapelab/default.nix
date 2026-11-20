@@ -71,6 +71,8 @@
     hash = "sha256-7y8Z7C/xUnOwIOCM1Gv5WjYpYkOGQzewaOJfW3XALj8=";
     javaPackage = pkgs.jdk25_headless;
     memory = "8192M";
+    motd = ''\u00A7b\u00A7l\u26CF \u00A76\u00A7lBuilder's \u00A7e\u00A7lParadise \u00A7b\u00A7l\u26CF\n\u00A77Don't look \u00A7c\u00A7kback\u00A77!'';
+    seed = "6994583329261680997";
   };
 
   immich.enable = true;

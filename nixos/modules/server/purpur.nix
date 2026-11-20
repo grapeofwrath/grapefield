@@ -96,6 +96,29 @@ in {
       default = "2048M";
       description = "Value for both -Xms and -Xmx.";
     };
+
+    motd = mkOption {
+      type = types.str;
+      default = "NixOS Minecraft server!";
+      description = "Message of the day";
+    };
+
+    seed = mkOption {
+      type = types.str;
+      description = "Level Seed";
+    };
+
+    restartMessage = mkOption {
+      type = types.str;
+      default = "Server restarting in 2 minutes";
+      description = "Message from the server before it restarts";
+    };
+
+    restartTime = mkOption {
+      type = types.str;
+      default = "03:00";
+      description = "24hr time of restart <hour>:<min>";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -110,16 +133,32 @@ in {
         difficulty = 3;
         gamemode = 1;
         max-players = 5;
-        motd = "NixOS Minecraft server!";
+        motd = cfg.motd;
         white-list = false;
         enable-rcon = true;
         "rcon.password" = "herobrine";
+        level-seed = cfg.seed;
       };
       jvmOpts = "-Xms${cfg.memory} -Xmx${cfg.memory}";
     };
+
+    systemd.services.minecraft-restart = {
+      description = "Daily Minecraft server restart";
+      serviceConfig.Type = "oneshot";
+      script = ''
+        echo "say ${cfg.restartMessage}" > /run/minecraft-server.stdin || true
+        sleep 120
+        ${pkgs.systemd}/bin/systemctl try-restart minecraft-server.service
+      '';
+    };
+
+    systemd.timers.minecraft-restart = {
+      wantedBy = [ "timers.target" ];
+      timerConfig.OnCalendar = "*-*-* ${cfg.restartTime}:00";
+    };
     systemd.tmpfiles.rules = [
-      "d /var/lib/mincraft 2770 minecraft minecraft - -"
+      "d /var/lib/minecraft 2770 minecraft minecraft - -"
     ];
-    systemd.services.minecraft-server.serviceConfig.UMask = "0077";
+    systemd.services.minecraft-server.serviceConfig.UMask = lib.mkForce "0007";
   };
 }
